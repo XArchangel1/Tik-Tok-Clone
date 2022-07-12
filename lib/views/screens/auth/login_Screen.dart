@@ -2,18 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:tik_tok/constants.dart';
+import 'package:tik_tok/views/widgets/text_input_field.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Text(
+            Text(
               "Tik-Tok Clone",
               style: TextStyle(
                 fontSize: 35,
@@ -21,7 +25,7 @@ class LoginScreen extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
             ),
-             Text(
+            Text(
               'Login',
               style: TextStyle(
                 fontSize: 35,
@@ -29,8 +33,80 @@ class LoginScreen extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
             ),
-
-            const SizedBox(height: 25,),
+            const SizedBox(
+              height: 25,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextInputField(
+                controller: _emailcontroller,
+                labelText: 'Email',
+                icon: Icons.email,
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: TextInputField(
+                controller: _passwordcontroller,
+                labelText: 'Password',
+                icon: Icons.lock,
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              decoration: BoxDecoration(
+                color: buttonColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+              ),
+              child: InkWell(
+                onTap: () {
+                  print('Login User');
+                },
+                child: const Center(
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            InkWell(
+              onTap: () {
+                print("Navigating User");
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Don't have an account",
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    'Register',
+                    style: TextStyle(fontSize: 20, color: buttonColor),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

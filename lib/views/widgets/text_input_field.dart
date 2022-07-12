@@ -1,8 +1,14 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:tik_tok/constants.dart';
 
 class TextInputField extends StatelessWidget {
-  const TextInputField({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  final String labelText;
+  final bool isObscure;
+  final IconData icon;
+  const TextInputField({Key? key,required this.controller, required this.labelText, this.isObscure = false, required this.icon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +29,7 @@ class TextInputField extends StatelessWidget {
           borderSide: const BorderSide(color: borderColor),
         ),
       ),
+      obscureText: isObscure,
     );
   }
 }
