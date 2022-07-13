@@ -102,9 +102,7 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
               child: InkWell(
-                onTap: () {
-                  print('Login User');
-                },
+                onTap: () => auth.registerUser(_userNamecontroller.text, _emailcontroller.text, _passwordcontroller.text, image),
                 child: const Center(
                   child: Text(
                     'Register',
