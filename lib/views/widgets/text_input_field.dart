@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import 'package:tik_tok/constants.dart';
 
