@@ -9,7 +9,7 @@ import 'controllers/auth_controller.dart';
 const backgroundColor = Colors.black;
 var buttonColor = Colors.red[400];
 const borderColor = Colors.grey;
-//git checkout
+
 //firebase
 var firebaseAuth = FirebaseAuth.instance;
 var firebaseStorage = FirebaseStorage.instance;
