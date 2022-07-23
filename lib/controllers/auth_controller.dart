@@ -5,11 +5,31 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tik_tok/constants.dart';
 import 'package:tik_tok/models/user.dart' as model;
+import 'package:tik_tok/views/screens/auth/login_Screen.dart';
+import 'package:tik_tok/views/screens/home_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
+  late Rx<User?> _user;
   late Rx<File?> _pickImage;
   File? get profilePhoto => _pickImage.value;
+
+  @override
+  void onReady() {
+    super.onReady();
+    _user = Rx<User?>(firebaseAuth.currentUser);
+    _user.bindStream(firebaseAuth.authStateChanges());
+    ever(_user, _setInitialScreen);
+  }
+
+  _setInitialScreen(User? user) {
+    if (user == null) {
+      Get.offAll(() => LoginScreen());
+    } else {
+      Get.offAll(() => const HomeScreen());
+    }
+  }
+
   void pickImage() async {
     final pickImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -61,6 +81,20 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.snackbar("Error Creating an Acoount", e.toString());
+    }
+  }
+
+  void loginUser(String email, String password) async {
+    try {
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await firebaseAuth.signInWithEmailAndPassword(
+            email: email, password: password);
+        print("log success");
+      } else {
+        Get.snackbar("Error Logging In", "Please Enter all the fields");
+      }
+    } catch (e) {
+      Get.snackbar("Error logging in Acoount", e.toString());
     }
   }
 }

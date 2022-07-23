@@ -13,9 +13,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        child: Column(
+      resizeToAvoidBottomInset: false,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
@@ -34,11 +35,9 @@ class LoginScreen extends StatelessWidget {
                 fontWeight: FontWeight.w900,
               ),
             ),
-
             const SizedBox(
               height: 25,
             ),
-
             Container(
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -48,11 +47,9 @@ class LoginScreen extends StatelessWidget {
                 icon: Icons.person,
               ),
             ),
-
             const SizedBox(
               height: 25,
             ),
-            
             Container(
               width: MediaQuery.of(context).size.width,
               margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -72,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                 controller: _passwordcontroller,
                 labelText: 'Password',
                 icon: Icons.lock,
+                isObscure: true,
               ),
             ),
             const SizedBox(
@@ -87,9 +85,8 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               child: InkWell(
-                onTap: () {
-                  print('Login User');
-                },
+                onTap: () => auth.loginUser(
+                    _emailcontroller.text, _passwordcontroller.text),
                 child: const Center(
                   child: Text(
                     'Login',
@@ -127,6 +124,7 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+  );
   }
 }
